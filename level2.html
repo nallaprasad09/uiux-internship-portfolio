@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 2: Intermediate Showcase | Cognifyz Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Landing Page Showcase Container */
+    .landing-showcase-box {
+      border: 1px solid var(--glass-border);
+      background: #080c14;
+      border-radius: 20px;
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    }
+
+    /* Aura Product Landing Page Simulation */
+    .aura-landing {
+      background: #090d16;
+      border-radius: 12px;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+      color: #e2e8f0;
+      padding: 2rem;
+    }
+
+    .aura-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      padding-bottom: 1rem;
+    }
+
+    .aura-logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .aura-logo-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      box-shadow: 0 0 10px var(--color-cyan);
+    }
+
+    .aura-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .aura-link {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .aura-link:hover {
+      color: #fff;
+    }
+
+    .aura-btn-small {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .aura-btn-small:hover {
+      background: #fff;
+      color: #090d16;
+    }
+
+    /* Hero section */
+    .aura-hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    @media (min-width: 768px) {
+      .aura-hero {
+        grid-template-columns: 1.2fr 1fr;
+      }
+    }
+
+    .aura-hero-text {
+      text-align: left;
+    }
+
+    .aura-hero-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      color: var(--color-cyan);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .aura-headline {
+      font-size: 2.8rem;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      background: linear-gradient(135deg, #ffffff 40%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .aura-description {
+      font-size: 1rem;
+      color: #94a3b8;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .aura-cta-btn {
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-indigo));
+      color: #fff;
+      border: none;
+      padding: 0.9rem 2rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
+      transition: var(--transition-bounce);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .aura-cta-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(6, 182, 212, 0.5);
+    }
+
+    /* CSS Animated Product Render */
+    .aura-product-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .aura-product-bg-glow {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: var(--color-cyan);
+      filter: blur(50px);
+      opacity: 0.25;
+      z-index: 1;
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+
+    .aura-product-device {
+      width: 180px;
+      height: 260px;
+      background: linear-gradient(to bottom, #1e293b, #0f172a);
+      border-radius: 90px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2.5rem 1rem;
+    }
+
+    .aura-device-glow-ring {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, transparent 30%, rgba(6, 182, 212, 0.4) 70%, var(--color-cyan) 100%);
+      box-shadow: 0 0 20px var(--color-cyan), inset 0 0 15px var(--color-cyan);
+      animation: pulse-glow 3s infinite alternate;
+    }
+
+    .aura-device-speaker-grill {
+      width: 120px;
+      height: 60px;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 20%);
+      background-size: 6px 6px;
+      opacity: 0.6;
+    }
+
+    /* Task 4: Weather Icon Design Grid */
+    .icon-design-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .icon-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      position: relative;
+      transition: var(--transition-smooth);
+    }
+
+    .icon-box:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+    }
+
+    .icon-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .icon-toggle-btn {
+      font-size: 0.7rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border);
+      color: var(--text-secondary);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .icon-toggle-btn:hover {
+      color: #fff;
+      background: var(--color-cyan);
+      border-color: transparent;
+    }
+
+    /* SVG Weather Icon Classes & Keyframe bindings */
+    .weather-svg {
+      width: 64px;
+      height: 64px;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* SUN: Rotation */
+    .icon-sun-rays {
+      transform-origin: 32px 32px;
+      stroke: var(--color-amber);
+      stroke-width: 2.5;
+    }
+    .animated .icon-sun-rays {
+      animation: spin-slow 12s linear infinite;
+    }
+    .icon-sun-center {
+      fill: rgba(245, 158, 11, 0.2);
+      stroke: var(--color-amber);
+      stroke-width: 2.5;
+    }
+
+    /* CLOUD base styling */
+    .icon-cloud-body {
+      fill: rgba(255, 255, 255, 0.08);
+      stroke: var(--text-primary);
+      stroke-width: 2.5;
+    }
+
+    /* RAIN drops */
+    .icon-rain-drop {
+      stroke: var(--color-cyan);
+      stroke-width: 2;
+    }
+    .animated .icon-rain-drop-1 {
+      animation: rain-fall 1.5s ease-in-out infinite;
+    }
+    .animated .icon-rain-drop-2 {
+      animation: rain-fall 1.5s ease-in-out infinite 0.5s;
+    }
+    .animated .icon-rain-drop-3 {
+      animation: rain-fall 1.5s ease-in-out infinite 1s;
+    }
+
+    /* STORM bolt */
+    .icon-lightning-bolt {
+      stroke: var(--color-purple);
+      fill: rgba(168, 85, 247, 0.2);
+      stroke-width: 2;
+    }
+    .animated .icon-lightning-bolt {
+      animation: lightning-flash 2.5s ease-in-out infinite;
+    }
+
+    /* WIND lines */
+    .icon-wind-line {
+      stroke: var(--text-secondary);
+      stroke-width: 2.5;
+    }
+    .animated .icon-wind-line-1 {
+      animation: wind-blow 2s ease-in-out infinite;
+    }
+    .animated .icon-wind-line-2 {
+      animation: wind-blow 2s ease-in-out infinite 0.4s;
+    }
+    .animated .icon-wind-line-3 {
+      animation: wind-blow 2s ease-in-out infinite 0.8s;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="portfolio-header">
+    <div class="nav-container">
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon">C</div>
+        <span>Cognifyz UI/UX</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Dashboard</a></li>
+        <li><a href="level1.html" class="nav-link">Level 1</a></li>
+        <li><a href="level2.html" class="nav-link active">Level 2</a></li>
+        <li><a href="level3.html" class="nav-link">Level 3</a></li>
+        <li><a href="level4.html" class="nav-link">Level 4</a></li>
+        <li><a href="submission_kit.html" class="nav-link">Submission Kit</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Container -->
+  <main class="container">
+
+    <!-- Page Intro Header -->
+    <div class="page-intro">
+      <span class="badge badge-intermediate">Level 2: Intermediate</span>
+      <h1 class="page-title">Hierarchy, Structure & Layout</h1>
+      <p class="page-subtitle">
+        Building user-engaging landing page environments and refining geometric icon language.
+      </p>
+    </div>
+
+    <!-- TASK 3: CREATE A LANDING PAGE -->
+    <section class="task-section">
+      <div class="task-header">
+        <div class="task-title">
+          <span class="task-number">3</span>
+          <h2>Aura Landing Page Simulator</h2>
+        </div>
+        <span class="task-objective">Objective: Develop skills in creating an engaging landing page</span>
+      </div>
+
+      <div class="task-content">
+        <div class="landing-showcase-box">
+          <div class="aura-landing">
+            
+            <!-- Navbar -->
+            <nav class="aura-nav">
+              <div class="aura-logo">
+                <div class="aura-logo-dot"></div>
+                <span>AURA</span>
+              </div>
+              <ul class="aura-links">
+                <li><a href="#" class="aura-link" onclick="event.preventDefault()">Acoustics</a></li>
+                <li><a href="#" class="aura-link" onclick="event.preventDefault()">Ambient Glow</a></li>
+                <li><a href="#" class="aura-link" onclick="event.preventDefault()">Design</a></li>
+              </ul>
+              <button class="aura-btn-small" onclick="alert('Proceeding to checkout!')">Order Now</button>
+            </nav>
+
+            <!-- Hero Body -->
+            <div class="aura-hero">
+              
+              <!-- Hero Text -->
+              <div class="aura-hero-text">
+                <span class="aura-hero-badge">Pre-orders open</span>
+                <h2 class="aura-headline">A soundstage for your senses.</h2>
+                <p class="aura-description">
+                  Aura merges high-fidelity spatial acoustics with custom, responsive ambient light projection to recreate nature's soundscapes inside your home.
+                </p>
+                <button class="aura-cta-btn" onclick="triggerCTA()">
+                  <span>Experience Aura</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+              </div>
+
+              <!-- Product Render -->
+              <div class="aura-product-wrapper">
+                <div class="aura-product-bg-glow"></div>
+                <div class="aura-product-device">
+                  <div class="aura-device-glow-ring"></div>
+                  <div class="aura-device-speaker-grill"></div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TASK 4: ICON DESIGN -->
+    <section class="task-section">
+      <div class="task-header">
+        <div class="task-title">
+          <span class="task-number">4</span>
+          <h2>Intuitive Icon Design Showcase</h2>
+        </div>
+        <span class="task-objective">Objective: Learn to design recognizable and intuitive icons</span>
+      </div>
+
+      <div class="task-content task-content-split">
+        
+        <!-- ICON GRID RENDERING -->
+        <div class="glass-card" style="padding: 2rem;">
+          <h3 style="margin-bottom: 1.25rem; font-size: 1.25rem;">Interactive Weather Set</h3>
+          
+          <div class="icon-design-grid">
+            
+            <!-- SUNNY -->
+            <div class="icon-box">
+              <svg class="weather-svg animated" id="icon-sunny" viewBox="0 0 64 64">
+                <!-- Outer rays -->
+                <g class="icon-sun-rays">
+                  <line x1="32" y1="8" x2="32" y2="14" />
+                  <line x1="32" y1="50" x2="32" y2="56" />
+                  <line x1="8" y1="32" x2="14" y2="32" />
+                  <line x1="50" y1="32" x2="56" y2="32" />
+                  <line x1="15" y1="15" x2="19.2" y2="19.2" />
+                  <line x1="44.8" y1="44.8" x2="49" y2="49" />
+                  <line x1="49.0" y1="15" x2="44.8" y2="19.2" />
+                  <line x1="19.2" y1="44.8" x2="15" y2="49" />
+                </g>
+                <!-- Central Sphere -->
+                <circle class="icon-sun-center" cx="32" cy="32" r="11" />
+              </svg>
+              <span class="icon-name">Sunny</span>
+              <button class="icon-toggle-btn" onclick="toggleAnim('icon-sunny', this)">Pause</button>
+            </div>
+
+            <!-- RAINY -->
+            <div class="icon-box">
+              <svg class="weather-svg animated" id="icon-rainy" viewBox="0 0 64 64">
+                <!-- Rain drops -->
+                <line class="icon-rain-drop icon-rain-drop-1" x1="24" y1="44" x2="24" y2="50" />
+                <line class="icon-rain-drop icon-rain-drop-2" x1="32" y1="44" x2="32" y2="50" />
+                <line class="icon-rain-drop icon-rain-drop-3" x1="40" y1="44" x2="40" y2="50" />
+                <!-- Cloud -->
+                <path class="icon-cloud-body" d="M46,32 C46,24.3 39.7,18 32,18 C26.1,18 21.1,21.7 19.1,26.9 C18.1,26.3 16.9,26 15.6,26 C11.4,26 8,29.4 8,33.6 C8,37.8 11.4,41.2 15.6,41.2 L45.4,41.2 C49.6,41.2 53,37.8 53,33.6 C53,29.8 50.2,26.7 46.5,26.2" />
+              </svg>
+              <span class="icon-name">Rainy</span>
+              <button class="icon-toggle-btn" onclick="toggleAnim('icon-rainy', this)">Pause</button>
+            </div>
+
+            <!-- STORMY -->
+            <div class="icon-box">
+              <svg class="weather-svg animated" id="icon-stormy" viewBox="0 0 64 64">
+                <!-- Lightning Bolt -->
+                <polygon class="icon-lightning-bolt" points="26,38 34,38 30,48 38,48 28,58 31,48 26,48" />
+                <!-- Cloud -->
+                <path class="icon-cloud-body" d="M46,32 C46,24.3 39.7,18 32,18 C26.1,18 21.1,21.7 19.1,26.9 C18.1,26.3 16.9,26 15.6,26 C11.4,26 8,29.4 8,33.6 C8,37.8 11.4,41.2 15.6,41.2 L45.4,41.2 C49.6,41.2 53,37.8 53,33.6 C53,29.8 50.2,26.7 46.5,26.2" />
+              </svg>
+              <span class="icon-name">Stormy</span>
+              <button class="icon-toggle-btn" onclick="toggleAnim('icon-stormy', this)">Pause</button>
+            </div>
+
+            <!-- WINDY -->
+            <div class="icon-box">
+              <svg class="weather-svg animated" id="icon-windy" viewBox="0 0 64 64">
+                <!-- Wind lines -->
+                <path class="icon-wind-line icon-wind-line-1" d="M10,22 L40,22 A6,6 0 1,0 34,16" />
+                <path class="icon-wind-line icon-wind-line-2" d="M6,32 L46,32 A6,6 0 1,1 40,38" />
+                <path class="icon-wind-line icon-wind-line-3" d="M12,42 L36,42 A4,4 0 1,0 32,38" />
+              </svg>
+              <span class="icon-name">Windy</span>
+              <button class="icon-toggle-btn" onclick="toggleAnim('icon-windy', this)">Pause</button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SPECIFICATIONS DRAWER -->
+        <div class="glass-card" style="padding: 2rem;">
+          <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">Design Specifications</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">
+            Both the landing page and icons adhere to a structured design system that prioritizes clarity, consistency, and readability.
+          </p>
+
+          <div class="spec-box" style="margin-bottom: 1rem;">
+            <div class="spec-title">SVG Geometry Parameters</div>
+            <pre class="spec-code" style="font-size: 0.8rem;">Grid Boundaries: 64px × 64px ViewBox
+Primary Stroke: #f8fafc (2.5px width)
+Accent Stroke: #06b6d4 (Cyan), #f59e0b (Amber)
+Stroke Ends: Round Cap & Join
+Surface Fills: rgba(255, 255, 255, 0.08)</pre>
+          </div>
+
+          <div class="spec-box">
+            <div class="spec-title">Aura Layout Hierarchy</div>
+            <pre class="spec-code" style="font-size: 0.8rem;">Headline Font: Outfit Semibold (2.8rem)
+Body Font: Inter Medium (1.0rem, line-height: 1.6)
+CTA Sizing: padding: 0.9rem 2rem, radius: 8px
+Spacing: 1.5rem (24px) baseline spacing grid</pre>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="portfolio-footer">
+    <p>© 2026 Cognifyz Technologies UI/UX Design Internship. All rights reserved.</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">
+      Contact: <a href="mailto:contact@cognifyz.com">contact@cognifyz.com</a> | 
+      LinkedIn: <a href="https://linkedin.com/company/cognifyz-technologies" target="_blank">@cognifyz-Technologies</a> | 
+      Web: <a href="https://www.cognifyz.com" target="_blank">www.cognifyz.com</a>
+    </p>
+  </footer>
+
+  <script>
+    function triggerCTA() {
+      alert("Welcome to the Aura Experience! Pre-order successful.");
+    }
+
+    function toggleAnim(svgId, btn) {
+      const svgObj = document.getElementById(svgId);
+      if (svgObj.classList.contains('animated')) {
+        svgObj.classList.remove('animated');
+        btn.innerText = 'Play';
+        btn.style.background = 'rgba(255,255,255,0.02)';
+        btn.style.color = 'var(--text-secondary)';
+      } else {
+        svgObj.classList.add('animated');
+        btn.innerText = 'Pause';
+        btn.style.background = 'var(--color-cyan)';
+        btn.style.color = '#fff';
+      }
+    }
+  </script>
+
+</body>
+</html>
