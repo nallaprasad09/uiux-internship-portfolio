@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Submission Kit | Cognifyz UI/UX Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .kit-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 900px) {
+      .kit-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .copy-box {
+      background: #070a0f;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 1rem;
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: var(--color-indigo);
+      border: none;
+      color: #fff;
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .copy-btn:hover {
+      background: #4f46e5;
+    }
+
+    .kit-step {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--color-cyan);
+      color: #000;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .step-text h4 {
+      margin-bottom: 0.25rem;
+      font-size: 1rem;
+    }
+
+    .step-text p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .badge-kit {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--color-amber);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="portfolio-header">
+    <div class="nav-container">
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon">C</div>
+        <span>Cognifyz UI/UX</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Dashboard</a></li>
+        <li><a href="level1.html" class="nav-link">Level 1</a></li>
+        <li><a href="level2.html" class="nav-link">Level 2</a></li>
+        <li><a href="level3.html" class="nav-link">Level 3</a></li>
+        <li><a href="level4.html" class="nav-link">Level 4</a></li>
+        <li><a href="submission_kit.html" class="nav-link active">Submission Kit</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Container -->
+  <main class="container">
+
+    <!-- Page Intro Header -->
+    <div class="page-intro">
+      <span class="badge badge-kit">Submission Preparation</span>
+      <h1 class="page-title">Final Submission Kit</h1>
+      <p class="page-subtitle">
+        Everything you need to successfully package your UI/UX design internship project, host it live, and publish your LinkedIn showcase video.
+      </p>
+    </div>
+
+    <div class="kit-grid">
+
+      <!-- SECTION 1: CODE HOSTING & GITHUB -->
+      <div class="glass-card" style="padding: 2rem;">
+        <h3 style="margin-bottom: 1.25rem; font-size: 1.25rem; display:flex; align-items:center; gap:0.5rem;">
+          <span>🌐</span> 1. Deploying Live & GitHub Setup
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+          To get a public link to share on the final submission form, host your files online for free.
+        </p>
+
+        <div class="kit-step">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <h4>Push to GitHub</h4>
+            <p>Create a public repository named <code>uiux_project</code> on your GitHub account, drag and drop your workspace files (index, levels, style.css) into it, and commit them.</p>
+          </div>
+        </div>
+
+        <div class="kit-step">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <h4>Deploy Live (Free)</h4>
+            <p>Go to <a href="https://netlify.com" target="_blank" style="color:var(--color-cyan);">Netlify.com</a> or <a href="https://vercel.com" target="_blank" style="color:var(--color-cyan);">Vercel.com</a>. Drag and drop your project folder directly into their upload panel. It will give you a live <code>https://...</code> site link instantly!</p>
+          </div>
+        </div>
+
+        <div class="kit-step">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <h4>Note Down Your Links</h4>
+            <p>Save both the **GitHub Repository URL** and the **Netlify Live Demo URL** in a safe place. You will need to enter them in the Cognifyz submission form.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: SCREEN RECORDING GUIDE -->
+      <div class="glass-card" style="padding: 2rem;">
+        <h3 style="margin-bottom: 1.25rem; font-size: 1.25rem; display:flex; align-items:center; gap:0.5rem;">
+          <span>📹</span> 2. Showcase Video Outline
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+          Use a screen recorder (like OBS, Loom, or Windows Xbox Game Bar: <code>Win + Alt + R</code>) to make a 1-2 minute walkthrough video.
+        </p>
+
+        <div class="copy-box">
+          <button class="copy-btn" onclick="copyText('videoScript')">Copy Script</button>
+          <pre id="videoScript" style="font-family: monospace; font-size: 0.75rem; color: var(--color-cyan); white-space: pre-wrap; margin-top: 1rem;">
+[0:00 - 0:15] Hub Overview:
+Start on index.html. Introduce yourself: "Hi, I am presenting my final UI/UX internship submission showcase..."
+
+[0:15 - 0:35] Level 1 & 2:
+Go to Level 1. Click a few color cards in the Color Simulator to show colors shifting on the mobile phone mockup. 
+Go to Level 2. Show the Aura speaker layout, and click play on Sunny and Rainy SVG weather icons.
+
+[0:35 - 1:00] Level 3 & 4:
+Go to Level 3. Type an email and a weak password to show the strength meter, toggle show/hide. Hover navigation items.
+Go to Level 4. Click a mood board image to show the design rationale panel. Then click the Checkout button to trigger the loader-to-success confetti burst!
+
+[1:00 - 1:15] Wrap up:
+Show the dashboard hub once more and thank the reviewers.
+          </pre>
+        </div>
+      </div>
+
+      <!-- SECTION 3: LINKEDIN TEMPLATE -->
+      <div class="glass-card" style="grid-column: 1 / -1; padding: 2rem;">
+        <h3 style="margin-bottom: 1.25rem; font-size: 1.25rem; display:flex; align-items:center; gap:0.5rem;">
+          <span>📝</span> 3. LinkedIn Post Copy Template
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+          The PDF requires you to post your video on LinkedIn, tagging the company and using specific hashtags. Here is a pre-formatted draft ready to copy.
+        </p>
+
+        <div class="copy-box" style="background:#070a0f;">
+          <button class="copy-btn" onclick="copyText('linkedinPost')">Copy Template</button>
+          <div id="linkedinPost" style="font-size: 0.85rem; line-height: 1.6; color: var(--text-primary); padding-top: 1.5rem; white-space: pre-wrap;">
+🚀 Thrilled to share that I have successfully completed my UI/UX Design Internship with Cognifyz Technologies!
+
+During this tenure, I worked on implementing and demonstrating 8 core design and interaction tasks across 4 progression levels:
+- Foundational Element Design & color palette contrast simulator
+- Product Landing page grids and interactive animated SVG weather icon geometry
+- Advanced Glassmorphic Sign-Up form usability validations & dynamic navigation architectures
+- Travel App Mood Board visual rationales & high-fidelity micro-interactions (confetti order flows, bouncing heart feedback)
+
+Check out my screen-recording demonstration below!
+
+Special thanks to the team at @Cognifyz Technologies for providing this hands-on opportunity to grow as a designer.
+
+📂 GitHub Code: [PASTE_YOUR_GITHUB_REPOSITORY_URL_HERE]
+live Project Demo: [PASTE_YOUR_NETLIFY_OR_VERCEL_DEMO_URL_HERE]
+
+#cognifyztechnologies #cognifyz #cognifyztech #uiux #uidesign #uxdesign #frontend #portfolio
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="portfolio-footer">
+    <p>© 2026 Cognifyz Technologies UI/UX Design Internship. All rights reserved.</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">
+      Contact: <a href="mailto:contact@cognifyz.com">contact@cognifyz.com</a> | 
+      LinkedIn: <a href="https://linkedin.com/company/cognifyz-technologies" target="_blank">@cognifyz-Technologies</a> | 
+      Web: <a href="https://www.cognifyz.com" target="_blank">www.cognifyz.com</a>
+    </p>
+  </footer>
+
+  <script>
+    function copyText(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Text copied to clipboard!");
+      }).catch(err => {
+        console.error("Could not copy text: ", err);
+      });
+    }
+  </script>
+
+</body>
+</html>
