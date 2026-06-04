@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 4: Expert Showcase | Cognifyz Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Task 7: Travel App Mood Board styles */
+    .mood-board-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .mood-board-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .mood-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      aspect-ratio: 1;
+      cursor: pointer;
+      background: var(--bg-tertiary);
+      transition: var(--transition-bounce);
+    }
+
+    .mood-item:hover {
+      transform: scale(1.04) rotate(1deg);
+      border-color: rgba(255,255,255,0.2);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+
+    .mood-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+
+    .mood-item:hover .mood-img {
+      transform: scale(1.1);
+    }
+
+    /* Color Swatch card inside Mood Board */
+    .mood-swatch {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.25rem;
+      aspect-ratio: 1;
+    }
+
+    .mood-swatch-color {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .mood-swatch-hex {
+      font-family: monospace;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .mood-swatch-name {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Typography card inside Mood Board */
+    .mood-typo-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1.25rem;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.02);
+      aspect-ratio: 1;
+    }
+
+    .mood-typo-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .mood-typo-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Design intent overlay tooltip */
+    .rationale-panel {
+      background: rgba(99, 102, 241, 0.08);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+      display: none;
+      animation: pulse-glow 3s infinite alternate;
+    }
+
+    .rationale-heading {
+      font-size: 0.9rem;
+      color: var(--color-indigo);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Task 8: Micro-interactions Playground */
+    .playground-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .playground-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .playground-card {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      min-height: 280px;
+      position: relative;
+    }
+
+    /* Microinteraction 1: Checkout Loader */
+    .btn-checkout {
+      background: var(--color-indigo);
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 190px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+      outline: none;
+    }
+
+    /* Transition states */
+    .btn-checkout.loading {
+      width: 48px;
+      border-radius: 50%;
+      background: transparent;
+      border: 3px solid rgba(255,255,255,0.1);
+      border-top-color: var(--color-indigo);
+      box-shadow: none;
+      animation: spin-slow 0.8s linear infinite;
+      color: transparent;
+    }
+
+    .btn-checkout.success {
+      width: 190px;
+      background: var(--color-emerald);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+      cursor: default;
+    }
+
+    /* Confetti circle drops */
+    .confetti-particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0;
+    }
+
+    /* Microinteraction 2: Bouncing Heart Button */
+    .like-btn-wrapper {
+      position: relative;
+    }
+
+    .like-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition-bounce);
+      outline: none;
+    }
+
+    .like-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: scale(1.1);
+    }
+
+    .like-btn.liked {
+      background: rgba(236, 72, 153, 0.1);
+      border-color: rgba(236, 72, 153, 0.4);
+      color: var(--color-pink);
+      animation: heart-beat 0.5s ease-in-out;
+      text-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+    }
+
+    .bubble-heart {
+      position: absolute;
+      pointer-events: none;
+      color: var(--color-pink);
+      font-size: 1rem;
+      z-index: 10;
+      opacity: 0;
+      transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+    }
+
+    /* Microinteraction 3: Theme Switcher */
+    .theme-preview-box {
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      width: 100%;
+      height: 130px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+      background: #0f172a;
+      color: #f8fafc;
+    }
+
+    .theme-preview-box.light-theme {
+      background: #f8fafc;
+      color: #0f172a;
+      border-color: #e2e8f0;
+    }
+
+    /* The Switch Toggle */
+    .switch-toggle {
+      width: 64px;
+      height: 32px;
+      background: #334155;
+      border-radius: 20px;
+      padding: 3px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      position: relative;
+      transition: var(--transition-smooth);
+    }
+
+    .switch-toggle.active {
+      background: var(--color-cyan);
+    }
+
+    .switch-bead {
+      width: 26px;
+      height: 26px;
+      background: #fff;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 0.95rem;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.25);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .switch-toggle.active .switch-bead {
+      transform: translateX(32px) rotate(360deg);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="portfolio-header">
+    <div class="nav-container">
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon">C</div>
+        <span>Cognifyz UI/UX</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Dashboard</a></li>
+        <li><a href="level1.html" class="nav-link">Level 1</a></li>
+        <li><a href="level2.html" class="nav-link">Level 2</a></li>
+        <li><a href="level3.html" class="nav-link">Level 3</a></li>
+        <li><a href="level4.html" class="nav-link active">Level 4</a></li>
+        <li><a href="submission_kit.html" class="nav-link">Submission Kit</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Container -->
+  <main class="container">
+
+    <!-- Page Intro Header -->
+    <div class="page-intro">
+      <span class="badge badge-expert">Level 4: Expert</span>
+      <h1 class="page-title">Mood Curating & Micro-interactions</h1>
+      <p class="page-subtitle">
+        Curating spatial travel themes and assembling fluid, feedback-oriented interactive micro-states.
+      </p>
+    </div>
+
+    <!-- TASK 7: CREATE A MOOD BOARD -->
+    <section class="task-section">
+      <div class="task-header">
+        <div class="task-title">
+          <span class="task-number">7</span>
+          <h2>Wanderlust App Mood Board</h2>
+        </div>
+        <span class="task-objective">Objective: Master the art of curating a visually cohesive mood board</span>
+      </div>
+
+      <div class="task-content">
+        <div class="glass-card" style="padding: 2rem;">
+          <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">Travel App Inspiration Grid</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">
+            Click on any mood board cell (image, swatch, or typography card) to explore the visual rationale and design intent.
+          </p>
+
+          <div class="mood-board-grid">
+            
+            <!-- IMAGE: Adventure -->
+            <div class="mood-item" onclick="showRationale('adventure', 'Scenic Mountain Ridge', 'Evokes rugged landscapes, altitude challenges, and exploration desire. Direct, epic imagery creates space and breathing room.')">
+              <img class="mood-img" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&q=80" alt="Scenic Mountain Ridge">
+            </div>
+
+            <!-- SWATCH: sunset orange -->
+            <div class="mood-item mood-swatch" style="background:#0f0d0c;" onclick="showRationale('orange', 'Sunset Amber (#F59E0B)', 'Indicates warmth, energy, safety, and campfire light. Serves as the primary Call-To-Action color accent.')">
+              <div class="mood-swatch-color" style="background:#F59E0B;"></div>
+              <div>
+                <div class="mood-swatch-hex">#F59E0B</div>
+                <div class="mood-swatch-name">Sunset Amber</div>
+              </div>
+            </div>
+
+            <!-- IMAGE: Exploration -->
+            <div class="mood-item" onclick="showRationale('camping', 'Starry Campfire', 'Evokes remote community circles, warmth, shelter, and overnight journey memories. Grounds the user in organic, real-world experiences.')">
+              <img class="mood-img" src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=400&q=80" alt="Starry Campfire">
+            </div>
+
+            <!-- TYPOGRAPHY CARD -->
+            <div class="mood-item mood-typo-card" onclick="showRationale('typo-head', 'Heading Font: Outfit Bold', 'Outfit provides a modern, geometric structure. Bold weights project high confidence, clarity, and structural balance.')">
+              <div class="mood-typo-title">Outfit</div>
+              <div class="mood-typo-desc">Heading Specimen - 700 Bold</div>
+            </div>
+
+            <!-- SWATCH: Deep Forest -->
+            <div class="mood-item mood-swatch" style="background:#0c0f0d;" onclick="showRationale('forest', 'Deep Forest (#14532D)', 'Represents ecological values, sustainability, forests, and outdoor grounding. Serves as our base card background tone.')">
+              <div class="mood-swatch-color" style="background:#14532D;"></div>
+              <div>
+                <div class="mood-swatch-hex">#14532D</div>
+                <div class="mood-swatch-name">Deep Forest</div>
+              </div>
+            </div>
+
+            <!-- IMAGE: Relaxation -->
+            <div class="mood-item" onclick="showRationale('beach', 'Serene Coastline', 'Evokes fresh breeze, tranquility, space, and stress release. Highlights the relaxation and wellness aspects of travel schedules.')">
+              <img class="mood-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=80" alt="Serene Coastline">
+            </div>
+
+            <!-- TYPOGRAPHY BODY CARD -->
+            <div class="mood-item mood-typo-card" onclick="showRationale('typo-body', 'Body Font: Inter Medium', 'Inter provides a neutral, highly legible glyph system, which is critical for map lists and travel directions on small mobile displays.')">
+              <div class="mood-typo-title" style="font-family:'Inter'; font-weight:500; font-size:1.4rem;">Inter</div>
+              <div class="mood-typo-desc">Body Specimen - 500 Medium</div>
+            </div>
+
+            <!-- SWATCH: Glacier Blue -->
+            <div class="mood-item mood-swatch" style="background:#0c0f12;" onclick="showRationale('glacier', 'Glacier Blue (#06B6D4)', 'Signifies clean mountain water, fresh atmosphere, sky, and technological clarity. Prompts safe information flow.')">
+              <div class="mood-swatch-color" style="background:#06B6D4;"></div>
+              <div>
+                <div class="mood-swatch-hex">#06B6D4</div>
+                <div class="mood-swatch-name">Glacier Blue</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RATIONALE CONTAINER -->
+          <div class="rationale-panel" id="rationalePanel">
+            <div class="rationale-heading">
+              <span>💡</span>
+              <span id="rationaleTitle">Visual Intent</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-primary);" id="rationaleDesc">
+              Click elements above to inspect design reasons.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TASK 8: MICROINTERACTION DESIGN -->
+    <section class="task-section">
+      <div class="task-header">
+        <div class="task-title">
+          <span class="task-number">8</span>
+          <h2>Micro-interaction Design Playground</h2>
+        </div>
+        <span class="task-objective">Objective: Explore advanced UI design with micro-interactions</span>
+      </div>
+
+      <div class="task-content playground-grid">
+        
+        <!-- MICRO 1: CHECKOUT BUTTON -->
+        <div class="glass-card playground-card" id="checkoutPlayground">
+          <span class="element-label">1. Order Flow States</span>
+          
+          <button class="btn-checkout" id="checkoutBtn" onclick="runCheckoutFlow()">
+            <span id="checkoutIcon">🛒</span>
+            <span id="checkoutText">Complete Order</span>
+          </button>
+          
+          <span style="font-size: 0.75rem; color: var(--text-muted);">
+            States: Idle → Collapsing Spinner → Success State
+          </span>
+        </div>
+
+        <!-- MICRO 2: HEART BOUNCE -->
+        <div class="glass-card playground-card">
+          <span class="element-label">2. Heart Particle Reaction</span>
+          
+          <div class="like-btn-wrapper">
+            <button class="like-btn" id="likeBtn" onclick="triggerLike(event)">
+              🤍
+            </button>
+          </div>
+
+          <span style="font-size: 0.75rem; color: var(--text-muted);">
+            States: Idle → Spring Scale Bounce → Glowing Fill + Particles
+          </span>
+        </div>
+
+        <!-- MICRO 3: THEME SWITCHER -->
+        <div class="glass-card playground-card">
+          <span class="element-label">3. Localized Theme Shift</span>
+          
+          <div class="theme-preview-box" id="themePreviewBox">
+            <span style="font-size: 0.8rem; margin-bottom: 0.75rem; font-weight:600;" id="themeLabel">Dark Accent Panel</span>
+            
+            <div class="switch-toggle" id="themeToggle" onclick="toggleThemePreview()">
+              <div class="switch-bead">🌙</div>
+            </div>
+          </div>
+
+          <span style="font-size: 0.75rem; color: var(--text-muted);">
+            States: Dark Mode (Moon) → 360° Bead Spin Slider → Light Mode (Sun)
+          </span>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="portfolio-footer">
+    <p>© 2026 Cognifyz Technologies UI/UX Design Internship. All rights reserved.</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">
+      Contact: <a href="mailto:contact@cognifyz.com">contact@cognifyz.com</a> | 
+      LinkedIn: <a href="https://linkedin.com/company/cognifyz-technologies" target="_blank">@cognifyz-Technologies</a> | 
+      Web: <a href="https://www.cognifyz.com" target="_blank">www.cognifyz.com</a>
+    </p>
+  </footer>
+
+  <script>
+    /* Task 7: Mood Board rational switcher */
+    function showRationale(key, title, description) {
+      const panel = document.getElementById('rationalePanel');
+      const rationalTitle = document.getElementById('rationaleTitle');
+      const rationalDesc = document.getElementById('rationaleDesc');
+      
+      panel.style.display = 'block';
+      rationalTitle.innerText = title;
+      rationalDesc.innerText = description;
+      
+      // Auto scroll slightly to bring panel into focus if needed
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    /* Task 8: Micro-interaction 1 - Checkout Flow Button */
+    function runCheckoutFlow() {
+      const btn = document.getElementById('checkoutBtn');
+      const textObj = document.getElementById('checkoutText');
+      const iconObj = document.getElementById('checkoutIcon');
+      const container = document.getElementById('checkoutPlayground');
+
+      if (btn.classList.contains('loading') || btn.classList.contains('success')) {
+        // Reset state if clicked in success state
+        if (btn.classList.contains('success')) {
+          btn.className = 'btn-checkout';
+          textObj.innerText = 'Complete Order';
+          iconObj.innerText = '🛒';
+        }
+        return;
+      }
+
+      // Enter LOADING state (Progress)
+      btn.classList.add('loading');
+
+      setTimeout(() => {
+        // Enter SUCCESS state (Completion)
+        btn.classList.remove('loading');
+        btn.classList.add('success');
+        textObj.innerText = 'Order Placed! ✓';
+        iconObj.innerText = '';
+
+        // Trigger floating confetti particles
+        const colors = ['#f59e0b', '#10b981', '#06b6d4', '#ec4899', '#a855f7'];
+        const rect = btn.getBoundingClientRect();
+        
+        for (let i = 0; i < 30; i++) {
+          const particle = document.createElement('div');
+          particle.className = 'confetti-particle';
+          particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          
+          // Position particle at button center
+          container.appendChild(particle);
+          
+          const angle = Math.random() * Math.PI * 2;
+          const distance = 40 + Math.random() * 80;
+          const destX = Math.cos(angle) * distance;
+          const destY = Math.sin(angle) * distance;
+          
+          // Animate particle using JS inline transitions
+          particle.style.left = `${btn.offsetLeft + btn.offsetWidth / 2}px`;
+          particle.style.top = `${btn.offsetTop + btn.offsetHeight / 2}px`;
+          particle.style.opacity = '1';
+          particle.style.transition = 'transform 0.8s cubic-bezier(0.1, 0.8, 0.3, 1), opacity 0.8s ease-out';
+          
+          setTimeout(() => {
+            particle.style.transform = `translate(${destX}px, ${destY}px) scale(0.5)`;
+            particle.style.opacity = '0';
+          }, 50);
+
+          setTimeout(() => {
+            particle.remove();
+          }, 900);
+        }
+      }, 2000);
+    }
+
+    /* Task 8: Micro-interaction 2 - Bouncy Heart with flying sub-hearts */
+    function triggerLike(e) {
+      const btn = document.getElementById('likeBtn');
+      const wrapper = btn.parentElement;
+      
+      btn.classList.toggle('liked');
+      
+      if (btn.classList.contains('liked')) {
+        btn.innerText = '❤️';
+        
+        // Spawn flying hearts
+        for (let i = 0; i < 3; i++) {
+          const subHeart = document.createElement('div');
+          subHeart.className = 'bubble-heart';
+          subHeart.innerText = '💖';
+          subHeart.style.left = '20px';
+          subHeart.style.top = '15px';
+          
+          wrapper.appendChild(subHeart);
+          
+          const flyX = (Math.random() - 0.5) * 40;
+          const flyY = -60 - Math.random() * 30;
+          
+          setTimeout(() => {
+            subHeart.style.transform = `translate(${flyX}px, ${flyY}px) scale(1.5)`;
+            subHeart.style.opacity = '1';
+          }, 30);
+
+          setTimeout(() => {
+            subHeart.style.transform += ` translate(${(Math.random() - 0.5) * 10}px, -20px) scale(0)`;
+            subHeart.style.opacity = '0';
+          }, 400);
+
+          setTimeout(() => {
+            subHeart.remove();
+          }, 850);
+        }
+      } else {
+        btn.innerText = '🤍';
+      }
+    }
+
+    /* Task 8: Micro-interaction 3 - Localized Theme Shift */
+    function toggleThemePreview() {
+      const toggle = document.getElementById('themeToggle');
+      const box = document.getElementById('themePreviewBox');
+      const bead = toggle.querySelector('.switch-bead');
+      const label = document.getElementById('themeLabel');
+      
+      toggle.classList.toggle('active');
+      
+      if (toggle.classList.contains('active')) {
+        box.classList.add('light-theme');
+        bead.innerText = '☀️';
+        label.innerText = 'Light Accent Panel';
+      } else {
+        box.classList.remove('light-theme');
+        bead.innerText = '🌙';
+        label.innerText = 'Dark Accent Panel';
+      }
+    }
+  </script>
+
+</body>
+</html>
