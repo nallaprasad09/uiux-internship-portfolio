@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 3: Advanced Showcase | Cognifyz Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Task 5: Form Enhancer styling */
+    .form-comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 900px) {
+      .form-comparison-grid {
+        grid-template-columns: 1fr 1.2fr;
+      }
+    }
+
+    /* Before Form: intentionally ugly and hard to use */
+    .bad-form-card {
+      background: #f1f5f9;
+      color: #0f172a;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 1.5rem;
+      text-align: left;
+    }
+
+    .bad-form-title {
+      font-size: 1.25rem;
+      color: #0f172a;
+      margin-bottom: 1.25rem;
+      font-weight: 700;
+    }
+
+    .bad-form-group {
+      margin-bottom: 1rem;
+    }
+
+    .bad-form-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+
+    .bad-form-input {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #94a3b8;
+      border-radius: 2px;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .bad-form-btn {
+      background: #475569;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      width: 100%;
+    }
+
+    /* Enhanced Form: Glassmorphic and super accessible */
+    .good-form-card {
+      padding: 2.5rem 2rem;
+      position: relative;
+    }
+
+    .good-form-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #fff 50%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .input-field-group {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .good-input {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition-smooth);
+    }
+
+    .good-input:focus {
+      border-color: var(--color-indigo);
+      box-shadow: 0 0 10px rgba(99,102,241,0.25);
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* Floating Labels styling */
+    .floating-label {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      pointer-events: none;
+      transition: var(--transition-smooth);
+    }
+
+    .good-input:focus ~ .floating-label,
+    .good-input:not(:placeholder-shown) ~ .floating-label {
+      top: -8px;
+      left: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--color-indigo);
+      background: var(--bg-secondary);
+      padding: 0 0.35rem;
+      border-radius: 4px;
+    }
+
+    /* Password strength feedback */
+    .strength-wrapper {
+      margin-top: -1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .strength-bar-bg {
+      height: 4px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 0.35rem;
+    }
+
+    .strength-bar {
+      width: 0%;
+      height: 100%;
+      background: var(--color-pink);
+      transition: var(--transition-smooth);
+    }
+
+    .strength-text {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Eye toggle icon */
+    .toggle-pass-btn {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .toggle-pass-btn:hover {
+      color: #fff;
+    }
+
+    /* Task 6: Navigation Showcases */
+    .nav-showcase-box {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .nav-demo-wrapper {
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .nav-demo-title {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Navigation Option 1: Sliding Underline Nav */
+    .sliding-nav {
+      display: flex;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      padding: 0.5rem;
+      border-radius: 12px;
+      position: relative;
+      list-style: none;
+      width: max-content;
+      max-width: 100%;
+    }
+
+    .sliding-nav-item {
+      padding: 0.6rem 1.25rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+      transition: var(--transition-smooth);
+    }
+
+    .sliding-nav-item.active {
+      color: #fff;
+    }
+
+    .sliding-underline {
+      position: absolute;
+      height: calc(100% - 1rem);
+      background: linear-gradient(135deg, var(--color-indigo), var(--color-purple));
+      border-radius: 8px;
+      z-index: 1;
+      transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+      top: 0.5rem;
+      left: 0.5rem;
+      width: 0;
+    }
+
+    /* Navigation Option 2: Mobile Bubble Bottom Bar */
+    .mobile-bubble-bar-container {
+      display: flex;
+      justify-content: center;
+      padding: 1rem 0;
+    }
+
+    .bubble-bar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: rgba(18, 24, 38, 0.9);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 0.5rem 1rem;
+      width: 320px;
+      position: relative;
+    }
+
+    .bubble-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      color: var(--text-muted);
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+      transition: var(--transition-bounce);
+    }
+
+    .bubble-item.active {
+      color: var(--color-cyan);
+      transform: translateY(-4px);
+    }
+
+    .bubble-icon {
+      font-size: 1.25rem;
+    }
+
+    .bubble-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      margin-top: 2px;
+      opacity: 0;
+      transition: var(--transition-smooth);
+    }
+
+    .bubble-item.active .bubble-label {
+      opacity: 1;
+    }
+
+    .bubble-indicator {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      background: rgba(6, 182, 212, 0.15);
+      border-radius: 16px;
+      z-index: 1;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.2);
+      top: 0.5rem;
+      left: 1rem;
+    }
+
+    /* Navigation Option 3: Expanding Search Bar Header */
+    .expanding-nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 0.75rem 1.5rem;
+      position: relative;
+      height: 60px;
+      overflow: hidden;
+    }
+
+    .exp-logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #fff;
+      transition: var(--transition-smooth);
+    }
+
+    .exp-links-box {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      transition: var(--transition-smooth);
+    }
+
+    .exp-link {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .exp-search-form {
+      position: absolute;
+      right: 1.5rem;
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      transition: var(--transition-smooth);
+      width: 32px;
+      height: 32px;
+      justify-content: center;
+    }
+
+    .exp-search-input {
+      width: 0;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+      transition: var(--transition-smooth);
+    }
+
+    .exp-search-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      outline: none;
+    }
+
+    /* Active state for expanding search form */
+    .exp-search-form.expanded {
+      background: rgba(0,0,0,0.4);
+      border-color: var(--glass-border);
+      width: calc(100% - 3rem);
+      left: 1.5rem;
+      padding: 0 0.5rem;
+    }
+
+    .exp-search-form.expanded .exp-search-input {
+      width: 100%;
+      padding-left: 0.5rem;
+    }
+
+    .exp-search-form.expanded ~ .exp-links-box,
+    .exp-search-form.expanded ~ .exp-logo {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="portfolio-header">
+    <div class="nav-container">
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon">C</div>
+        <span>Cognifyz UI/UX</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Dashboard</a></li>
+        <li><a href="level1.html" class="nav-link">Level 1</a></li>
+        <li><a href="level2.html" class="nav-link">Level 2</a></li>
+        <li><a href="level3.html" class="nav-link active">Level 3</a></li>
+        <li><a href="level4.html" class="nav-link">Level 4</a></li>
+        <li><a href="submission_kit.html" class="nav-link">Submission Kit</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Container -->
+  <main class="container">
+
+    <!-- Page Intro Header -->
+    <div class="page-intro">
+      <span class="badge badge-advanced">Level 3: Advanced</span>
+      <h1 class="page-title">Forms & Navigation Architecture</h1>
+      <p class="page-subtitle">
+        Optimizing data capture templates and building fluid, responsive navigation interfaces.
+      </p>
+    </div>
+
+    <!-- TASK 5: ENHANCE A FORM -->
+    <section class="task-section">
+      <div class="task-header">
+        <div class="task-title">
+          <span class="task-number">5</span>
+          <h2>Usability Form Redesign</h2>
+        </div>
+        <span class="task-objective">Objective: Improve visual appeal and user friendliness of forms</span>
+      </div>
+
+      <div class="task-content form-comparison-grid">
+        
+        <!-- BAD FORM (BEFORE) -->
+        <div class="glass-card" style="padding: 2rem;">
+          <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">Before Redesign</h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">
+            Common usability issues: lack of hierarchy, harsh contrast, tiny text boxes, no field validation feedback, plain styles.
+          </p>
+
+          <div class="bad-form-card">
+            <h4 class="bad-form-title">Member Registration</h4>
+            <div class="bad-form-group">
+              <label class="bad-form-label">EMAIL ADDRESS</label>
+              <input type="text" class="bad-form-input" placeholder="someone@gmail.com">
+            </div>
+            <div class="bad-form-group">
+              <label class="bad-form-label">CHOOSE PASSWORD</label>
+              <input type="password" class="bad-form-input">
+            </div>
+            <button class="bad-form-btn" onclick="alert('Raw submission completed.')">REGISTER</button>
+          </div>
+        </div>
+
+        <!-- GOOD FORM (AFTER) -->
+        <div class="glass-card good-form-card">
+          <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">After Redesign</h3>
+          <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem;">
+            Enhanced design: glassmorphism, floating active labels, live password strength validation, click toggles, and fluid response.
+          </p>
+
+          <form id="enhancedForm" onsubmit="submitForm(event)">
+            
+            <!-- Email -->
+            <div class="input-field-group">
+              <input type="email" id="userEmail" class="good-input" placeholder=" " required>
+              <label for="userEmail" class="floating-label">Email Address</label>
+            </div>
+
+            <!-- Password -->
+            <div class="input-field-group">
+              <input type="password" id="userPassword" class="good-input" placeholder=" " oninput="checkStrength(this.value)" required>
+              <label for="userPassword" class="floating-label">Create Password</label>
+              <button type="button" class="toggle-pass-btn" onclick="togglePassVisibility()">👁️</button>
+            </div>
+
+            <!-- Password Strength meter -->
+            <div class="strength-wrapper">
+              <div class="strength-bar-bg">
+                <div class="strength-bar" id="strengthBar"></div>
+              </div>
+              <span class="strength-text" id="strengthText">Strength: Too Short</span>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn-solid" style="width:100%; border:none; padding: 0.9rem; font-size: 0.95rem; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem;" id="submitBtn">
+              <span id="btnText">Sign Up Free</span>
+            </button>
+
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TASK 6: NAVIGATION BAR DESIGN -->
+    <section class="task-section">
+      <div class="task-header">
+        <div class="task-title">
+          <span class="task-number">6</span>
+          <h2>Fluid Navigation Systems</h2>
+        </div>
+        <span class="task-objective">Objective: Develop skills in designing a functional navigation bar</span>
+      </div>
+
+      <div class="task-content">
+        <div class="glass-card nav-showcase-box">
+          
+          <!-- DEMO 1: SLIDING UNDERLINE NAV -->
+          <div class="nav-demo-wrapper">
+            <h4 class="nav-demo-title">1. Sliding Highlight Menu (Desktop)</h4>
+            <div style="position:relative;">
+              <div class="sliding-underline" id="underlineIndicator"></div>
+              <div class="sliding-nav" id="slidingNav">
+                <span class="sliding-nav-item active" onclick="activateSlidingItem(this, 0)">Home</span>
+                <span class="sliding-nav-item" onclick="activateSlidingItem(this, 1)">Products</span>
+                <span class="sliding-nav-item" onclick="activateSlidingItem(this, 2)">Services</span>
+                <span class="sliding-nav-item" onclick="activateSlidingItem(this, 3)">Contact</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DEMO 2: MOBILE BUBBLE NAV BAR -->
+          <div class="nav-demo-wrapper">
+            <h4 class="nav-demo-title">2. Glowing Bubble Tab Bar (Mobile)</h4>
+            <div class="mobile-bubble-bar-container">
+              <div class="bubble-bar" id="bubbleBar">
+                <div class="bubble-indicator" id="bubbleIndicator"></div>
+                
+                <div class="bubble-item active" onclick="activateBubbleItem(this, 0)">
+                  <span class="bubble-icon">🏠</span>
+                  <span class="bubble-label">Home</span>
+                </div>
+                <div class="bubble-item" onclick="activateBubbleItem(this, 1)">
+                  <span class="bubble-icon">🔍</span>
+                  <span class="bubble-label">Explore</span>
+                </div>
+                <div class="bubble-item" onclick="activateBubbleItem(this, 2)">
+                  <span class="bubble-icon">🔔</span>
+                  <span class="bubble-label">Alerts</span>
+                </div>
+                <div class="bubble-item" onclick="activateBubbleItem(this, 3)">
+                  <span class="bubble-icon">👤</span>
+                  <span class="bubble-label">Profile</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DEMO 3: COLLAPSIBLE EXPANDING SEARCH NAV -->
+          <div class="nav-demo-wrapper">
+            <h4 class="nav-demo-title">3. Collapsible Expanding Search Nav (App Bar)</h4>
+            <div class="expanding-nav-bar">
+              <div class="exp-logo" id="expLogo">AETHER</div>
+              
+              <ul class="exp-links-box" id="expLinks">
+                <li><a href="#" class="exp-link" onclick="event.preventDefault()">Home</a></li>
+                <li><a href="#" class="exp-link" onclick="event.preventDefault()">Docs</a></li>
+                <li><a href="#" class="exp-link" onclick="event.preventDefault()">Blog</a></li>
+              </ul>
+
+              <!-- Form wrapper -->
+              <div class="exp-search-form" id="searchForm">
+                <input type="text" class="exp-search-input" id="searchInput" placeholder="Search database elements...">
+                <button type="button" class="exp-search-btn" onclick="toggleSearch()" id="searchBtn">
+                  🔍
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="portfolio-footer">
+    <p>© 2026 Cognifyz Technologies UI/UX Design Internship. All rights reserved.</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">
+      Contact: <a href="mailto:contact@cognifyz.com">contact@cognifyz.com</a> | 
+      LinkedIn: <a href="https://linkedin.com/company/cognifyz-technologies" target="_blank">@cognifyz-Technologies</a> | 
+      Web: <a href="https://www.cognifyz.com" target="_blank">www.cognifyz.com</a>
+    </p>
+  </footer>
+
+  <script>
+    /* Task 5: Password Strength validation Logic */
+    function checkStrength(password) {
+      const bar = document.getElementById('strengthBar');
+      const text = document.getElementById('strengthText');
+      
+      if (password.length === 0) {
+        bar.style.width = '0%';
+        text.innerText = 'Strength: Too Short';
+        text.style.color = 'var(--text-muted)';
+        return;
+      }
+      
+      let score = 0;
+      if (password.length >= 8) score++;
+      if (/[A-Z]/.test(password)) score++;
+      if (/[0-9]/.test(password)) score++;
+      if (/[^A-Za-z0-9]/.test(password)) score++;
+      
+      if (score <= 1) {
+        bar.style.width = '25%';
+        bar.style.backgroundColor = 'var(--color-pink)';
+        text.innerText = 'Strength: Weak';
+        text.style.color = 'var(--color-pink)';
+      } else if (score === 2 || score === 3) {
+        bar.style.width = '60%';
+        bar.style.backgroundColor = 'var(--color-amber)';
+        text.innerText = 'Strength: Medium';
+        text.style.color = 'var(--color-amber)';
+      } else {
+        bar.style.width = '100%';
+        bar.style.backgroundColor = 'var(--color-emerald)';
+        text.innerText = 'Strength: Strong (Secure)';
+        text.style.color = 'var(--color-emerald)';
+      }
+    }
+
+    function togglePassVisibility() {
+      const input = document.getElementById('userPassword');
+      if (input.type === 'password') {
+        input.type = 'text';
+      } else {
+        input.type = 'password';
+      }
+    }
+
+    function submitForm(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const text = document.getElementById('btnText');
+      
+      // Simulate loading state
+      btn.style.opacity = '0.8';
+      text.innerHTML = '<span class="loading-spinner"></span> Creating Account...';
+      
+      setTimeout(() => {
+        text.innerHTML = 'Success! Welcome aboard ✓';
+        btn.style.backgroundColor = 'var(--color-emerald)';
+        btn.style.boxShadow = '0 0 15px var(--color-emerald)';
+      }, 1500);
+    }
+
+    /* Task 6: Nav style 1 - Sliding Highlight Indicator */
+    function activateSlidingItem(element, index) {
+      document.querySelectorAll('#slidingNav .sliding-nav-item').forEach(el => el.classList.remove('active'));
+      element.classList.add('active');
+      
+      const indicator = document.getElementById('underlineIndicator');
+      const itemWidth = element.offsetWidth;
+      const itemLeft = element.offsetLeft;
+      
+      indicator.style.width = `${itemWidth}px`;
+      indicator.style.transform = `translateX(${itemLeft - 8}px)`;
+    }
+
+    /* Task 6: Nav style 2 - Mobile Bubble Tab Bar */
+    function activateBubbleItem(element, index) {
+      document.querySelectorAll('#bubbleBar .bubble-item').forEach(el => el.classList.remove('active'));
+      element.classList.add('active');
+      
+      const indicator = document.getElementById('bubbleIndicator');
+      // Tab width = 320px container padding. Each item is spaced out.
+      // Math: pad left = 16px. Item offset center is roughly width gap.
+      // Let's set it dynamically by reading item position.
+      const itemLeft = element.offsetLeft;
+      indicator.style.transform = `translateX(${itemLeft - 16}px)`;
+    }
+
+    /* Task 6: Nav style 3 - Collapsible Expanding Search Header */
+    function toggleSearch() {
+      const form = document.getElementById('searchForm');
+      const input = document.getElementById('searchInput');
+      const links = document.getElementById('expLinks');
+      const logo = document.getElementById('expLogo');
+      
+      if (form.classList.contains('expanded')) {
+        // Collapse
+        if(input.value.trim() !== '') {
+          alert(`Searching for: ${input.value}`);
+          input.value = '';
+        }
+        form.classList.remove('expanded');
+      } else {
+        // Expand
+        form.classList.add('expanded');
+        setTimeout(() => input.focus(), 150);
+      }
+    }
+
+    // Auto calculate initial positions on mount
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set sliding nav initial underline
+      const activeSliding = document.querySelector('#slidingNav .active');
+      if (activeSliding) activateSlidingItem(activeSliding, 0);
+
+      // Set bubble nav initial indicator
+      const activeBubble = document.querySelector('#bubbleBar .active');
+      if (activeBubble) activateBubbleItem(activeBubble, 0);
+    });
+  </script>
+
+</body>
+</html>
