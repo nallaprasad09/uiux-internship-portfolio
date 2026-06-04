@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cognifyz UI/UX Internship Portfolio | Dashboard Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Unique Hero styles */
+    .hero-section {
+      position: relative;
+      padding: 4rem 1.5rem 3rem;
+      text-align: center;
+      background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15), transparent 60%);
+      border-radius: 24px;
+      margin-top: 1rem;
+      margin-bottom: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      overflow: hidden;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      line-height: 1.1;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #ffffff 30%, #a855f7 70%, #6366f1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-description {
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Stats Board styling */
+    .stats-board {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .stat-card {
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-indigo));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Levels Grid Styling */
+    .levels-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .levels-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .level-card {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .level-card::after {
+      content: '';
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--level-color, var(--color-indigo)), transparent 70%);
+      top: -75px;
+      right: -75px;
+      opacity: 0.15;
+      transition: var(--transition-smooth);
+    }
+
+    .level-card:hover::after {
+      opacity: 0.3;
+      transform: scale(1.2);
+    }
+
+    .level-card-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .level-card-title {
+      font-size: 1.8rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .level-card-description {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      min-height: 3rem;
+    }
+
+    .task-preview-list {
+      list-style: none;
+      margin-bottom: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1rem;
+    }
+
+    .task-preview-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .task-bullet {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--level-color, var(--color-indigo));
+      box-shadow: 0 0 8px var(--level-color, var(--color-indigo));
+    }
+
+    .explore-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--glass-border);
+      transition: var(--transition-smooth);
+      width: 100%;
+      text-align: center;
+    }
+
+    .level-card:hover .explore-btn {
+      background: var(--level-color, var(--color-indigo));
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 0 15px rgba(255, 255, 255, 0.1);
+      border-color: transparent;
+      transform: translateY(-1px);
+    }
+
+    /* Set custom colors for each card */
+    .card-lvl1 { --level-color: var(--color-emerald); }
+    .card-lvl2 { --level-color: var(--color-cyan); }
+    .card-lvl3 { --level-color: var(--color-indigo); }
+    .card-lvl4 { --level-color: var(--color-amber); }
+
+    /* Hero Floating Decorative elements */
+    .floating-circle {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      z-index: -1;
+      opacity: 0.12;
+    }
+
+    .circle-1 {
+      width: 300px;
+      height: 300px;
+      background: var(--color-indigo);
+      top: -50px;
+      left: 10%;
+    }
+
+    .circle-2 {
+      width: 250px;
+      height: 250px;
+      background: var(--color-pink);
+      bottom: -50px;
+      right: 15%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="portfolio-header">
+    <div class="nav-container">
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon">C</div>
+        <span>Cognifyz UI/UX</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link active">Dashboard</a></li>
+        <li><a href="level1.html" class="nav-link">Level 1</a></li>
+        <li><a href="level2.html" class="nav-link">Level 2</a></li>
+        <li><a href="level3.html" class="nav-link">Level 3</a></li>
+        <li><a href="level4.html" class="nav-link">Level 4</a></li>
+        <li><a href="submission_kit.html" class="nav-link">Submission Kit</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <!-- Hero Banner Section -->
+    <section class="hero-section glass-card">
+      <div class="floating-circle circle-1"></div>
+      <div class="floating-circle circle-2"></div>
+      <span class="badge badge-advanced">Cognifyz Internship Portfolio</span>
+      <h1 class="hero-title">Interactive UI/UX Showcase</h1>
+      <p class="hero-description">
+        Welcome to the technical implementation of the UI/UX design internship project submission. 
+        This dashboard presents a highly visual, interactive playground for all 8 tasks across 
+        the 4 progression levels—from basic element principles to expert micro-interactions.
+      </p>
+    </section>
+
+    <!-- Project Metrics Overview -->
+    <section class="stats-board">
+      <div class="stat-card glass-card">
+        <div class="stat-number">08 / 08</div>
+        <div class="stat-label">Tasks Implemented</div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Internship Complete</div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-number">4 Levels</div>
+        <div class="stat-label">Progression Paths</div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-number">HTML5/CSS3</div>
+        <div class="stat-label">Aesthetic Core Stack</div>
+      </div>
+    </section>
+
+    <!-- Levels Grid -->
+    <section class="levels-grid">
+
+      <!-- LEVEL 1 CARD -->
+      <div class="level-card glass-card card-lvl1">
+        <div>
+          <div class="level-card-header">
+            <span class="badge badge-beginner">Level 1</span>
+            <h2 class="level-card-title">Beginner Showcase</h2>
+          </div>
+          <p class="level-card-description">
+            Focuses on foundational element design principles, contrast guidelines, and basic layout structure.
+          </p>
+          <ul class="task-preview-list">
+            <li class="task-preview-item">
+              <span class="task-bullet"></span>
+              <span><strong>Task 1:</strong> Simple Element Design (Buttons & Cards)</span>
+            </li>
+            <li class="task-preview-item">
+              <span class="task-bullet"></span>
+              <span><strong>Task 2:</strong> Interactive Color Palette Simulator</span>
+            </li>
+          </ul>
+        </div>
+        <a href="level1.html" class="explore-btn">
+          Explore Level 1 
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+
+      <!-- LEVEL 2 CARD -->
+      <div class="level-card glass-card card-lvl2">
+        <div>
+          <div class="level-card-header">
+            <span class="badge badge-intermediate">Level 2</span>
+            <h2 class="level-card-title">Intermediate Showcase</h2>
+          </div>
+          <p class="level-card-description">
+            Develops skills for landing pages, structural hierarchy, and intuitive icon geometry.
+          </p>
+          <ul class="task-preview-list">
+            <li class="task-preview-item">
+              <span class="task-bullet"></span>
+              <span><strong>Task 3:</strong> Aura smart-home device Landing Page</span>
+            </li>
+            <li class="task-preview-item">
+              <span class="task-bullet"></span>
+              <span><strong>Task 4:</strong> Animated Weather Icon Set (SVG)</span>
+            </li>
+          </ul>
+        </div>
+        <a href="level2.html" class="explore-btn">
+          Explore Level 2
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+
+      <!-- LEVEL 3 CARD -->
+      <div class="level-card glass-card card-lvl3">
+        <div>
+          <div class="level-card-header">
+            <span class="badge badge-advanced">Level 3</span>
+            <h2 class="level-card-title">Advanced Showcase</h2>
+          </div>
+          <p class="level-card-description">
+            Improves usability structures through form refactoring and dynamic website navigation.
+          </p>
+          <ul class="task-preview-list">
+            <li class="task-preview-item">
+              <span class="task-bullet"></span>
+              <span><strong>Task 5:</strong> Form Enhancer (Before/After comparison)</span>
+            </li>
+            <li class="task-preview-item">
+              <span class="task-bullet"></span>
+              <span><strong>Task 6:</strong> Sliding & Expanding Navigation Systems</span>
+            </li>
+          </ul>
+        </div>
+        <a href="level3.html" class="explore-btn">
+          Explore Level 3
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+
+      <!-- LEVEL 4 CARD -->
+      <div class="level-card glass-card card-lvl4">
+        <div>
+          <div class="level-card-header">
+            <span class="badge badge-expert">Level 4</span>
+            <h2 class="level-card-title">Expert Showcase</h2>
+          </div>
+          <p class="level-card-description">
+            Masters creative direction via mood boards and interactive design via micro-interactions.
+          </p>
+          <ul class="task-preview-list">
+            <li class="task-preview-item">
+              <span class="task-bullet"></span>
+              <span><strong>Task 7:</strong> Nomad Travel App Mood Board</span>
+            </li>
+            <li class="task-preview-item">
+              <span class="task-bullet"></span>
+              <span><strong>Task 8:</strong> Micro-interactions Playground</span>
+            </li>
+          </ul>
+        </div>
+        <a href="level4.html" class="explore-btn">
+          Explore Level 4
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="portfolio-footer">
+    <p>© 2026 Cognifyz Technologies UI/UX Design Internship. All rights reserved.</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">
+      Contact: <a href="mailto:contact@cognifyz.com">contact@cognifyz.com</a> | 
+      LinkedIn: <a href="https://linkedin.com/company/cognifyz-technologies" target="_blank">@cognifyz-Technologies</a> | 
+      Web: <a href="https://www.cognifyz.com" target="_blank">www.cognifyz.com</a>
+    </p>
+  </footer>
+
+</body>
+</html>
