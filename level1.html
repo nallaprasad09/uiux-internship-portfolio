@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 1: Beginner Showcase | Cognifyz Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Task 1 Component styles */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .showcase-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .element-card {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+      justify-content: center;
+      min-height: 250px;
+    }
+
+    .element-label {
+      align-self: flex-start;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Premium Button Styles */
+    .btn-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .btn-demo {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      border: 1px solid transparent;
+      outline: none;
+    }
+
+    .btn-solid {
+      background: var(--color-indigo);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-solid:hover {
+      background: #4f46e5;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+    }
+
+    .btn-glow-outline {
+      background: transparent;
+      color: var(--color-cyan);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.1);
+    }
+
+    .btn-glow-outline:hover {
+      background: rgba(6, 182, 212, 0.05);
+      border-color: var(--color-cyan);
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-glassmorphic {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-glassmorphic:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .btn-loading {
+      background: var(--color-purple);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 14px rgba(168, 85, 247, 0.4);
+    }
+
+    .btn-loading:hover {
+      background: #9333ea;
+      transform: translateY(-2px);
+    }
+
+    .loading-spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin-slow 1s linear infinite;
+    }
+
+    /* Premium Product Card Style */
+    .product-preview-card {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      transition: var(--transition-smooth);
+    }
+
+    .product-preview-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .product-img-box {
+      width: 100%;
+      height: 160px;
+      background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--color-indigo);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .product-body {
+      padding: 1.25rem;
+    }
+
+    .product-title {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .product-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+      line-height: 1.4;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .product-price {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-cyan);
+    }
+
+    /* Premium Profile Card Style */
+    .profile-preview-card {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: var(--transition-smooth);
+    }
+
+    .profile-preview-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .profile-avatar-wrapper {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-pink), var(--color-purple));
+      display: grid;
+      place-items: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+    }
+
+    .profile-status-dot {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 14px;
+      height: 14px;
+      background: var(--color-emerald);
+      border: 2px solid var(--bg-secondary);
+      border-radius: 50%;
+    }
+
+    .profile-name {
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .profile-role {
+      font-size: 0.85rem;
+      color: var(--color-pink);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .profile-socials {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .profile-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-stat-val {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-primary);
+    }
+
+    .profile-stat-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Task 2 Color Palette Simulator styles */
+    .simulator-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 900px) {
+      .simulator-container {
+        grid-template-columns: 1.2fr 1fr;
+      }
+    }
+
+    .palette-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .palette-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem;
+      cursor: pointer;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      transition: var(--transition-smooth);
+    }
+
+    .palette-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .palette-card.active {
+      background: rgba(99, 102, 241, 0.1);
+      border-color: var(--color-indigo);
+    }
+
+    .palette-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .palette-name {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .palette-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .palette-swatches {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .swatch {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Mobile Mockup device rendering */
+    .mobile-mockup-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mobile-mockup {
+      width: 280px;
+      height: 520px;
+      background: #000;
+      border: 10px solid #222;
+      border-radius: 36px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-smooth);
+    }
+
+    /* Mobile Mockup Inner styling */
+    .mock-screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 1.25rem;
+      font-size: 0.9rem;
+      transition: background-color 0.5s ease;
+      color: var(--mock-text-primary, #ffffff);
+      background-color: var(--mock-bg, #0B0F19);
+    }
+
+    .mock-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    .mock-pill {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      background: var(--mock-accent-light, rgba(255,255,255,0.1));
+      color: var(--mock-primary, #fff);
+      transition: var(--transition-smooth);
+    }
+
+    .mock-body-card {
+      background: var(--mock-card-bg, rgba(255, 255, 255, 0.05));
+      border: 1px solid var(--mock-card-border, rgba(255, 255, 255, 0.08));
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      transition: var(--transition-smooth);
+    }
+
+    .mock-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--mock-text-primary, #fff);
+      transition: var(--transition-smooth);
+    }
+
+    .mock-card-desc {
+      font-size: 0.75rem;
+      color: var(--mock-text-secondary, #94a3b8);
+      line-height: 1.4;
+      transition: var(--transition-smooth);
+    }
+
+    .mock-btn {
+      background-color: var(--mock-primary, #6366f1);
+      color: var(--mock-btn-text, #ffffff);
+      padding: 0.75rem;
+      text-align: center;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: var(--transition-smooth);
+      margin-top: auto;
+    }
+
+    .mock-btn:hover {
+      filter: brightness(1.1);
+    }
+
+    /* Accessibility indicator badge */
+    .accessibility-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--color-emerald);
+      background: rgba(16, 185, 129, 0.1);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    /* Design Specs Details drawer */
+    .specs-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .specs-modal {
+      width: 90%;
+      max-width: 500px;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+      background: transparent;
+      border: none;
+      font-size: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="portfolio-header">
+    <div class="nav-container">
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon">C</div>
+        <span>Cognifyz UI/UX</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Dashboard</a></li>
+        <li><a href="level1.html" class="nav-link active">Level 1</a></li>
+        <li><a href="level2.html" class="nav-link">Level 2</a></li>
+        <li><a href="level3.html" class="nav-link">Level 3</a></li>
+        <li><a href="level4.html" class="nav-link">Level 4</a></li>
+        <li><a href="submission_kit.html" class="nav-link">Submission Kit</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Container -->
+  <main class="container">
+
+    <!-- Page Intro Header -->
+    <div class="page-intro">
+      <span class="badge badge-beginner">Level 1: Beginner</span>
+      <h1 class="page-title">Foundational Elements & Color</h1>
+      <p class="page-subtitle">
+        Exploring basic UI component designs, typography settings, and interactive color theory.
+      </p>
+    </div>
+
+    <!-- TASK 1: SIMPLE ELEMENT DESIGN -->
+    <section class="task-section">
+      <div class="task-header">
+        <div class="task-title">
+          <span class="task-number">1</span>
+          <h2>Simple Element Design</h2>
+        </div>
+        <span class="task-objective">Objective: Introduce basic element design principles</span>
+      </div>
+
+      <div class="task-content showcase-grid">
+        
+        <!-- BUTTON ELEMENT DEMO -->
+        <div class="element-card glass-card">
+          <span class="element-label">Sleek Buttons Showcase</span>
+          <div class="btn-container">
+            <button class="btn-demo btn-solid" onclick="alert('Primary action triggered!')">Solid Accent</button>
+            <button class="btn-demo btn-glow-outline" onclick="alert('Outline action triggered!')">Glowing Border</button>
+            <button class="btn-demo btn-glassmorphic" onclick="alert('Glassmorphic action triggered!')">Frosted Glass</button>
+            <button class="btn-demo btn-loading">
+              <span class="loading-spinner"></span>
+              <span>Processing...</span>
+            </button>
+          </div>
+          <button class="btn-demo btn-glassmorphic" style="font-size:0.75rem; padding: 0.4rem 0.8rem; margin-top:1rem;" onclick="showSpecs('buttons')">View Specs</button>
+        </div>
+
+        <!-- CARDS ELEMENT DEMO -->
+        <div class="element-card glass-card">
+          <span class="element-label">Visual Card Structure</span>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; width: 100%;">
+            
+            <!-- Product Card -->
+            <div class="product-preview-card">
+              <div class="product-img-box">
+                <span class="product-badge">New</span>
+                <span style="font-size:2.5rem;">🎧</span>
+              </div>
+              <div class="product-body">
+                <h3 class="product-title">AeroBuds Pro</h3>
+                <p class="product-desc">Next-generation sound staging with active ambient sound cancellations.</p>
+                <div class="product-footer">
+                  <span class="product-price">$189.00</span>
+                  <button class="btn-solid" style="padding:0.4rem 0.8rem; font-size:0.8rem; border-radius:6px; border:none; cursor:pointer;" onclick="alert('Added to cart!')">Buy Now</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Card -->
+            <div class="profile-preview-card">
+              <div class="profile-avatar-wrapper">
+                <div class="profile-avatar">JD</div>
+                <div class="profile-status-dot"></div>
+              </div>
+              <h3 class="profile-name">Jane Doe</h3>
+              <p class="profile-role">Senior Product Designer</p>
+              <div class="profile-socials">
+                <div class="profile-stat">
+                  <span class="profile-stat-val">12.5k</span>
+                  <span class="profile-stat-lbl">Followers</span>
+                </div>
+                <div class="profile-stat">
+                  <span class="profile-stat-val">420</span>
+                  <span class="profile-stat-lbl">Projects</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <button class="btn-demo btn-glassmorphic" style="font-size:0.75rem; padding: 0.4rem 0.8rem; margin-top:1rem;" onclick="showSpecs('cards')">View Specs</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TASK 2: BASIC COLOR PALETTE -->
+    <section class="task-section">
+      <div class="task-header">
+        <div class="task-title">
+          <span class="task-number">2</span>
+          <h2>Basic Color Palette Simulator</h2>
+        </div>
+        <span class="task-objective">Objective: Learn about color application in UI design</span>
+      </div>
+
+      <div class="task-content simulator-container">
+        
+        <!-- PALETTE SELECTOR SECTION -->
+        <div class="glass-card" style="padding: 2rem;">
+          <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">Select Color Palette</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">
+            Click a palette to dynamically apply the colors to the mobile mockup screen. Observe how text contrast and background hues alter readability.
+          </p>
+
+          <div class="palette-list">
+            
+            <!-- Palette 1 -->
+            <div class="palette-card active" onclick="applyPalette(this, 'ocean')" id="default-palette">
+              <div class="palette-info">
+                <span class="palette-name">Ocean Breeze</span>
+                <span class="palette-desc">Calming, medical, SaaS look.</span>
+              </div>
+              <div class="palette-swatches">
+                <span class="swatch" style="background:#0EA5E9;"></span>
+                <span class="swatch" style="background:#0B0F19;"></span>
+                <span class="swatch" style="background:#0284C7;"></span>
+              </div>
+            </div>
+
+            <!-- Palette 2 -->
+            <div class="palette-card" onclick="applyPalette(this, 'forest')">
+              <div class="palette-info">
+                <span class="palette-name">Forest Serenity</span>
+                <span class="palette-desc">Eco-friendly, fresh, organic theme.</span>
+              </div>
+              <div class="palette-swatches">
+                <span class="swatch" style="background:#10B981;"></span>
+                <span class="swatch" style="background:#05080c;"></span>
+                <span class="swatch" style="background:#047857;"></span>
+              </div>
+            </div>
+
+            <!-- Palette 3 -->
+            <div class="palette-card" onclick="applyPalette(this, 'sunset')">
+              <div class="palette-info">
+                <span class="palette-name">Sunset Horizon</span>
+                <span class="palette-desc">Creative, warm, vibrant vibe.</span>
+              </div>
+              <div class="palette-swatches">
+                <span class="swatch" style="background:#F43F5E;"></span>
+                <span class="swatch" style="background:#0f090b;"></span>
+                <span class="swatch" style="background:#E11D48;"></span>
+              </div>
+            </div>
+
+            <!-- Palette 4 -->
+            <div class="palette-card" onclick="applyPalette(this, 'cyberpunk')">
+              <div class="palette-info">
+                <span class="palette-name">Cyberpunk Neon</span>
+                <span class="palette-desc">Edgy, high-tech dark gaming design.</span>
+              </div>
+              <div class="palette-swatches">
+                <span class="swatch" style="background:#D946EF;"></span>
+                <span class="swatch" style="background:#09050d;"></span>
+                <span class="swatch" style="background:#A21CAF;"></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- MOBILE DEVICE SIMULATION -->
+        <div class="glass-card mobile-mockup-wrapper" style="padding: 2rem;">
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <div class="mobile-mockup" id="mock-device">
+              <div class="mock-screen">
+                <div class="mock-header">
+                  <span>9:41</span>
+                  <span class="mock-pill" id="mock-badge">Level 1 App</span>
+                </div>
+                
+                <div class="mock-body-card">
+                  <h4 class="mock-card-title" id="mock-title">Contrast check</h4>
+                  <p class="mock-card-desc" id="mock-desc">
+                    Good typography relies on at least a 4.5:1 color contrast ratio to satisfy WCAG 2.1 AA requirements.
+                  </p>
+                </div>
+                
+                <div class="mock-body-card" style="margin-bottom: 0;">
+                  <h4 class="mock-card-title">Dynamic Surface</h4>
+                  <p class="mock-card-desc">Notice how this surface card inherits colors from the theme palette.</p>
+                </div>
+
+                <div class="mock-btn" id="mock-btn-action" onclick="alert('Simulation Successful!')">Proceed Action</div>
+              </div>
+            </div>
+
+            <!-- Accessibility Feedback -->
+            <div class="accessibility-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Contrast Ratio: WCAG AA Pass (High Contrast)</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Spec Modal Overlay -->
+  <div class="specs-overlay" id="specs-modal" onclick="closeSpecs()">
+    <div class="specs-modal glass-card" onclick="event.stopPropagation()">
+      <button class="close-modal" onclick="closeSpecs()">×</button>
+      <h3 style="margin-bottom: 1rem; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:0.5rem;" id="modal-heading">Specs View</h3>
+      <div class="spec-box">
+        <div class="spec-title">CSS Code Properties</div>
+        <pre class="spec-code" id="modal-code">Loading properties...</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="portfolio-footer">
+    <p>© 2026 Cognifyz Technologies UI/UX Design Internship. All rights reserved.</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">
+      Contact: <a href="mailto:contact@cognifyz.com">contact@cognifyz.com</a> | 
+      LinkedIn: <a href="https://linkedin.com/company/cognifyz-technologies" target="_blank">@cognifyz-Technologies</a> | 
+      Web: <a href="https://www.cognifyz.com" target="_blank">www.cognifyz.com</a>
+    </p>
+  </footer>
+
+  <script>
+    // Color Palette definitions
+    const palettes = {
+      ocean: {
+        bg: '#0B0F19',
+        primary: '#0EA5E9',
+        cardBg: 'rgba(14, 165, 233, 0.05)',
+        cardBorder: 'rgba(14, 165, 233, 0.15)',
+        textPrimary: '#ffffff',
+        textSecondary: '#bae6fd',
+        btnText: '#ffffff'
+      },
+      forest: {
+        bg: '#05080c',
+        primary: '#10B981',
+        cardBg: 'rgba(16, 185, 129, 0.05)',
+        cardBorder: 'rgba(16, 185, 129, 0.15)',
+        textPrimary: '#ffffff',
+        textSecondary: '#a7f3d0',
+        btnText: '#05080c'
+      },
+      sunset: {
+        bg: '#0f090b',
+        primary: '#F43F5E',
+        cardBg: 'rgba(244, 63, 94, 0.05)',
+        cardBorder: 'rgba(244, 63, 94, 0.15)',
+        textPrimary: '#ffffff',
+        textSecondary: '#fecdd3',
+        btnText: '#ffffff'
+      },
+      cyberpunk: {
+        bg: '#09050d',
+        primary: '#D946EF',
+        cardBg: 'rgba(217, 70, 239, 0.05)',
+        cardBorder: 'rgba(217, 70, 239, 0.15)',
+        textPrimary: '#ffffff',
+        textSecondary: '#f5d0fe',
+        btnText: '#ffffff'
+      }
+    };
+
+    // Apply color palette function
+    function applyPalette(cardElement, paletteKey) {
+      // Manage active card states
+      document.querySelectorAll('.palette-card').forEach(card => card.classList.remove('active'));
+      cardElement.classList.add('active');
+
+      const palette = palettes[paletteKey];
+      const device = document.getElementById('mock-device');
+
+      // Update CSS Variables of Mock Device
+      device.style.setProperty('--mock-bg', palette.bg);
+      device.style.setProperty('--mock-primary', palette.primary);
+      device.style.setProperty('--mock-card-bg', palette.cardBg);
+      device.style.setProperty('--mock-card-border', palette.cardBorder);
+      device.style.setProperty('--mock-text-primary', palette.textPrimary);
+      device.style.setProperty('--mock-text-secondary', palette.textSecondary);
+      device.style.setProperty('--mock-btn-text', palette.btnText);
+    }
+
+    // Modal specs details
+    const specs = {
+      buttons: `.btn-solid {
+  background: #6366f1; /* Primary Indigo */
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-solid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+}`,
+      cards: `.glass-card {
+  background: rgba(18, 24, 38, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.15);
+}`
+    };
+
+    function showSpecs(key) {
+      document.getElementById('modal-heading').innerText = key === 'buttons' ? 'Button Element Specifications' : 'Card Design Specifications';
+      document.getElementById('modal-code').innerText = specs[key];
+      document.getElementById('specs-modal').style.display = 'flex';
+    }
+
+    function closeSpecs() {
+      document.getElementById('specs-modal').style.display = 'none';
+    }
+
+    // Apply default on load
+    document.addEventListener('DOMContentLoaded', () => {
+      applyPalette(document.getElementById('default-palette'), 'ocean');
+    });
+  </script>
+
+</body>
+</html>
